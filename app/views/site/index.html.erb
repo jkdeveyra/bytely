@@ -1,0 +1,30 @@
+<div id="site" class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container">
+      <div class="masthead clearfix">
+        <div class="inner">
+          <h3 class="masthead-brand"><%= link_to 'Byte.ly', root_path %></h3>
+          <nav>
+            <ul class="nav masthead-nav">
+              <li><%= link_to 'Features', features_path %></li>
+              <li><%= link_to 'About', about_path %></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="inner cover">
+        <%= form_with scope: '', class: 'form form-inline' do |f| %>
+            <%= f.text_field :link, class: 'input-lg form-control', placeholder: 'Place your URL here to shorten it.' %>
+            <input class="btn btn-primary btn-lg" type="submit" value="Shorten">
+        <% end %>
+        <p class="lead">
+          Shorten and measure links by Bytely - the world's #2 link management site. Just behind
+          <a href="https://bitly.com/"><b>bitly</b></a>
+        </p>
+        <p class="lead">
+          <%= link_to 'Learn more', features_path, class: 'btn btn-lg btn-default' %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
