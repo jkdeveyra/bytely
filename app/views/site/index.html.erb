@@ -13,17 +13,33 @@
         </div>
       </div>
       <div class="inner cover">
-        <%= form_with scope: '', class: 'form form-inline' do |f| %>
-            <%= f.text_field :link, class: 'input-lg form-control', placeholder: 'Place your URL here to shorten it.' %>
+        <%= form_with model: @link, class: 'form form-inline' do |f| %>
+            <%= f.text_field :url, class: 'input-lg form-control', placeholder: 'Place your URL here to shorten it.' %>
             <input class="btn btn-primary btn-lg" type="submit" value="Shorten">
         <% end %>
         <p class="lead">
           Shorten and measure links by Bytely - the world's #2 link management site. Just behind
           <a href="https://bitly.com/"><b>bitly</b></a>
         </p>
-        <p class="lead">
-          <%= link_to 'Learn more', features_path, class: 'btn btn-lg btn-default' %>
-        </p>
+
+        <% if @created_link %>
+            <div class="panel panel-default link-container">
+              <div class="panel-body">
+                <div class="original"><%= @created_link.url %></div>
+                <div>
+                  <span class="shorten"><%= link_shorten_path @created_link, full: false %></span>
+                  <a class="clipboard" data-clipboard-text="<%= link_shorten_path @created_link %>">Copy</a>
+                </div>
+              </div>
+            </div>
+        <% end %>
+       <div class="row">
+         <div class="col-lg-12">
+           <p class="lead">
+             <%= link_to 'Learn more', features_path, class: 'btn btn-lg btn-default' %>
+           </p>
+         </div>
+       </div>
       </div>
     </div>
   </div>

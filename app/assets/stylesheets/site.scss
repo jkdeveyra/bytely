@@ -152,4 +152,24 @@ body {
   p.lead {
     font-size: 16px;
   }
+
+  .panel.link-container {
+    background: #333333;
+    border-color: gray;
+    width: fit-content;
+    margin: 15px auto;
+    padding: 0 15px;
+
+    .panel-body {
+      padding: 10px;
+      .original {
+        color: #9e9e9e;
+      }
+      .shorten {
+        font-size: 16px;
+        font-weight: bold;
+        color: #75bfff;
+      }
+    }
+  }
 }
