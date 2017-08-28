@@ -8,12 +8,12 @@ class LinksController < ApplicationController
 
   # GET /:code
   def visit
-    if params[:code]
-      link = Link.where(code: params[:code]).first
-      redirect_to link.url if link
-      return
+    result = Link::Visit.run(params, request)
+    if result.success?
+      redirect_to result.link.url
+    else
+      redirect_to root_path
     end
-    redirect_to :root_path
   end
 
   # GET /links/1
@@ -31,16 +31,9 @@ class LinksController < ApplicationController
 
   # POST /links
   def create
-    @link = Link.new(link_params)
-    loop do
-      code = RandomCode.generate
-      unless Link.where(code: code).exists?
-        @link.code = code
-        break
-      end
-    end
-    if @link.save
-      redirect_to root_path(link_id: @link.id)
+    result = Link::Create.run(params)
+    if result.success?
+      redirect_to root_path(link_id: result.link.id)
     else
       redirect_to root_path, notice: 'Unable to shorten link.'
     end
