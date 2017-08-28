@@ -10,6 +10,7 @@ class Link::Visit < Operation
 
       ua = UserAgentParser.parse request.user_agent
       click = Click.new(
+         link_code: link.code,
         ip_address: request.remote_ip,
         session_id: request.session.id
       )

@@ -13,6 +13,9 @@ class Click
   field :device_family, type: String
   field :device_brand, type: String
   field :device_model, type: String
+  field :link_code, type: String
 
   belongs_to :link
+
+  index({ link_code: 1 })
 end

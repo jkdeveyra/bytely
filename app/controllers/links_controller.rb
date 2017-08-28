@@ -16,6 +16,10 @@ class LinksController < ApplicationController
     end
   end
 
+  def clicks
+    render json: Click.where(link_code: params[:id])
+  end
+
   # GET /links/:id_or_code
   def show
     render json: get_link

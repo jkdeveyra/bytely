@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   get '/features', to: 'site#features'
   get '/about', to: 'site#about'
   resources :clicks
-  resources :links, only: [:index, :show, :create]
+  resources :links, only: [:index, :show, :create] do
+    member do
+      get :clicks
+    end
+  end
 
   get '/:code', to: 'links#visit'
 
