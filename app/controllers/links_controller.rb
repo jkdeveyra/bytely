@@ -1,4 +1,6 @@
 class LinksController < ApplicationController
+  serialization_scope :view_context
+
   before_action :set_link, only: [:show, :edit, :update, :destroy]
 
   # GET /links
@@ -32,10 +34,14 @@ class LinksController < ApplicationController
   # POST /links
   def create
     result = Link::Create.run(params)
-    if result.success?
-      redirect_to root_path(link_id: result.link.id)
-    else
-      redirect_to root_path, notice: 'Unable to shorten link.'
+    respond_to do |format|
+      if result.success?
+        format.html { redirect_to root_path(link_id: result.link.id) }
+        format.json { render json: result.link }
+      else
+        format.html { redirect_to root_path, notice: 'Unable to shorten link.' }
+        format.json { render json: {event_item: result.link.errors}, status: :unprocessable_entity }
+      end
     end
   end
 
