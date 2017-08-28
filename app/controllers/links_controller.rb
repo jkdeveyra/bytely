@@ -18,8 +18,9 @@ class LinksController < ApplicationController
     end
   end
 
-  # GET /links/1
+  # GET /links/:id_or_code
   def show
+    render json: @link
   end
 
   # GET /links/new
@@ -63,7 +64,11 @@ class LinksController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_link
-    @link = Link.find(params[:id])
+    @link = if BSON::ObjectId.legal? params[:id]
+      Link.find(params[:id])
+    else
+      Link.where(code: params[:id]).first
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
