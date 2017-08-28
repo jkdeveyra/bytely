@@ -15,5 +15,16 @@
   <%= @link.code %>
 </p>
 
+<% if @link.clicks.present? %>
+<div>
+    <header>Click History (<%= @link.clicks.count %>)</header>
+    <ul>
+      <% @link.clicks.each do |c| %>
+        <li><%= "#{c.ip_address} #{c.created_at}" %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= link_to 'Edit', edit_link_path(@link) %> |
 <%= link_to 'Back', links_path %>

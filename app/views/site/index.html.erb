@@ -26,9 +26,10 @@
             <div class="panel panel-default link-container">
               <div class="panel-body">
                 <div class="original"><%= @created_link.url %></div>
-                <div>
+                <div class="details">
                   <span class="shorten"><%= link_shorten_path @created_link, full: false %></span>
                   <a class="clipboard" data-clipboard-text="<%= link_shorten_path @created_link %>">Copy</a>
+                  <%= link_to 'Stat', link_path(@created_link) %>
                 </div>
               </div>
             </div>
