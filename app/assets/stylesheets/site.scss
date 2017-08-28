@@ -178,4 +178,15 @@ body {
       }
     }
   }
+
+  .alert {
+    width: fit-content;
+    padding: 10px 100px;
+    margin: 15px auto;
+    text-shadow: none;
+    &.alert-danger {
+      background-color: #e2aeae;
+      color: #000000;
+    }
+  }
 }

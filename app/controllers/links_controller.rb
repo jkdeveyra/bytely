@@ -12,6 +12,7 @@ class LinksController < ApplicationController
     if result.success?
       redirect_to result.link.url
     else
+      flash[:error] = 'Oh snap! Link not found.'
       redirect_to root_path
     end
   end
@@ -22,7 +23,12 @@ class LinksController < ApplicationController
 
   # GET /links/:id_or_code
   def show
-    render json: get_link
+    link = get_link
+    if link
+      render json: link
+    else
+      render json: nil, status: :not_found
+    end
   end
 
   # POST /links
