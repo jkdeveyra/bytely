@@ -18,7 +18,10 @@ class LinksController < ApplicationController
   end
 
   def clicks
-    render json: Click.where(link_code: params[:id])
+    list = Click.where(link_code: params[:id])
+      .limit(10)
+      .skip(params[:after] || 0)
+    render json: list
   end
 
   # GET /links/:id_or_code
