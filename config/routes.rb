@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :links, only: [:index, :show, :create] do
     member do
       get :clicks
+      get :stat
     end
   end
 

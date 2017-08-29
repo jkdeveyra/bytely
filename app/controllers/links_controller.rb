@@ -34,6 +34,12 @@ class LinksController < ApplicationController
     end
   end
 
+  # GET /links/:code/stat
+  def stat
+    clicks = Link::Stat.run(params)
+    render json: clicks
+  end
+
   # POST /links
   def create
     result = Link::Create.run(params)
