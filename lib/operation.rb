@@ -9,8 +9,13 @@
 # to denote that it's executing a command.
 class Operation
   include Singleton
+  include Concurrent::Async
 
   def self.run(*args)
     self.instance.run(*args)
+  end
+
+  def self.async_run(*args)
+    self.instance.async.run(*args)
   end
 end

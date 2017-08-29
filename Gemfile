@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'mongoid', '~> 6.1.0'
 gem 'user_agent_parser'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'concurrent-ruby', require: 'concurrent'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
