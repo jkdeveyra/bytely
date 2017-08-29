@@ -1,3 +1,7 @@
+# Generate unique hourly click stat for a given date range
+# Uniqueness is identified by the session id associated with the click record.
+#
+# params: { id, after (pagination), from, to}
 class Link::Stat < Operation
   def run(params)
     after = params[:after].present? ? Integer(params[:after]) : 0
@@ -23,6 +27,7 @@ class Link::Stat < Operation
     ])
   end
 
+  private
   def created_at_filter(params)
     from = parse_datetime(params[:from])
     to = parse_datetime(params[:to])

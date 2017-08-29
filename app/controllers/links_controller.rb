@@ -10,13 +10,14 @@ class LinksController < ApplicationController
   def visit
     result = Link::Visit.run(params, request)
     if result.success?
-      redirect_to result.link.url
+      redirect_to result.url
     else
       flash[:error] = 'Oh snap! Link not found.'
       redirect_to root_path
     end
   end
 
+  # GET /links/:code/clicks
   def clicks
     list = Click.where(link_code: params[:id])
       .limit(10)
@@ -24,7 +25,8 @@ class LinksController < ApplicationController
     render json: list
   end
 
-  # GET /links/:id_or_code
+  # GET /links/:id
+  # GET /links/:code
   def show
     link = get_link
     if link

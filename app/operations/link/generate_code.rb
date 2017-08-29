@@ -11,7 +11,6 @@ class Link::GenerateCode < Operation
     loop do
       code = RandomCode.generate(min: min_len, max: min_len + LENGTH_RANGE)
       if Link.where(code: code).exists?
-        puts "collide code: #{code} loop_count: #{loop_count}"
         loop_count += 1
         inc_min_len if loop_count > 1
       else
