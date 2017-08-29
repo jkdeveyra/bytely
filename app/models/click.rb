@@ -18,4 +18,5 @@ class Click
   belongs_to :link
 
   index({ link_code: 1 })
+  index({ session_id: 1 })
 end

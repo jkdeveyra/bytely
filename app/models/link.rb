@@ -11,5 +11,6 @@ class Link
 
   has_many :clicks
 
-  index({ url: 1, code: 1 })
+  index({ url: 1 }, { unique: true })
+  index({ code: 1 }, { unique: true })
 end
