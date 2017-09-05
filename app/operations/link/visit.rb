@@ -5,9 +5,8 @@ class Link::Visit < Operation
     link = params[:code].present? ? Link.where(code: params[:code]).first : nil
     Click::Create.async_run(link: link, request: request) if link
 
-    OpenStruct.new(
-      success?: link.present?,
-      url: link.url
-    )
+    result = OpenStruct.new success?: link.present?
+    result.url = link.url if link.present?
+    result
   end
 end
