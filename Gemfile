@@ -57,6 +57,7 @@ group :test do
   gem 'rspec-rails', '~> 3.6'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.8'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
