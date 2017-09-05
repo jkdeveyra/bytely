@@ -14,6 +14,8 @@ feature 'Create link', js: true do
     find('input[type="submit"]').click
 
     expect(Link.count).to equal 1
-    expect(page).to have_content "127.0.0.1/#{Link.first.code}"
+
+    url = URI.parse(current_url)
+    expect(page).to have_content "#{url.host}:#{url.port}/#{Link.first.code}"
   end
 end

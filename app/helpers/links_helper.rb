@@ -5,6 +5,6 @@ module LinksHelper
   end
 
   def link_shorten_prepend(full: true)
-    full ? root_url : "#{request.host}/"
+    full ? root_url : "#{request.host}:#{request.port}/"
   end
 end
