@@ -55,6 +55,9 @@ Services specs:
 rspec spec/operations
 ```
 
+### Reports
+After running the tests, the RSpec report can be viewed at `/reports/rspec.html`.
+
 ## Indexing
 To create indices in the MongoDB database, run the following code:
 ```
