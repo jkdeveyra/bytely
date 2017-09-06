@@ -3,13 +3,13 @@
 
 $(document).on('turbolinks:load', function () {
   if ($('#site').length > 0) {
-    const $shorten = $('.shorten')
+    const $shortened = $('.shortened')
     const $linkContainer = $('.link-container')
     const $errorContainer = $('.error-container')
     const $clipboard = $('#site .clipboard')
     const $statLink = $('#site a.stat')
 
-    $shorten.tooltip({
+    $shortened.tooltip({
       title: 'Copied',
       trigger: 'manual',
       placement: 'bottom'
@@ -17,13 +17,13 @@ $(document).on('turbolinks:load', function () {
 
     const clipboard = new Clipboard('#site .clipboard');
     clipboard.on('success', function(e) {
-      $shorten.tooltip('show')
+      $shortened.tooltip('show')
       setTimeout(function () {
-        $shorten.tooltip('hide')
+        $shortened.tooltip('hide')
       }, 750)
     })
 
-    $('#shorten-form').submit(function(e) {
+    $('#shortened-form').submit(function(e) {
       const formElem = this
       e.preventDefault()
 
@@ -34,8 +34,8 @@ $(document).on('turbolinks:load', function () {
         data: data,
         success: function (data) {
           $linkContainer.find('.original').html(data.original_url)
-          $shorten.html($shorten.data('prepend') + data.code)
-          $clipboard[0].dataset.clipboardText = data.shorten_url
+          $shortened.html($shortened.data('prepend') + data.code)
+          $clipboard[0].dataset.clipboardText = data.shortened_url
           $statLink.prop('href', $statLink.data('prepend') + data.id)
           $linkContainer.removeClass('hidden')
           $errorContainer.addClass('hidden')

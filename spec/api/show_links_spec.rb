@@ -10,7 +10,7 @@ describe 'Show link' do
       id: link.id.to_s,
       title: link.title,
       code: link.code,
-      shorten_url: "#{server_url}/#{link.code}",
+      shortened_url: "#{server_url}/#{link.code}",
       original_url: link.url
     )
   end
@@ -22,7 +22,7 @@ describe 'Show link' do
       id: link.id.to_s,
       title: link.title,
       code: link.code,
-      shorten_url: "#{server_url}/#{link.code}",
+      shortened_url: "#{server_url}/#{link.code}",
       original_url: link.url
     )
   end

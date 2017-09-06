@@ -2,15 +2,15 @@ class LinkSerializer < ActiveModel::Serializer
   attribute :id
   attribute :title
   attribute :code
-  attribute :shorten_url
+  attribute :shortened_url
   attribute :original_url
 
   def id
     object.id.to_s
   end
 
-  def shorten_url
-    view_context.link_shorten_path object
+  def shortened_url
+    view_context.link_shortened_path object
   end
 
   def original_url

@@ -1,4 +1,4 @@
-# Creates or returns an existing Link object which represents the shorten link
+# Creates or returns an existing Link object which represents the shortened link
 #
 # === Parameters
 # `params` accepts the following hash:

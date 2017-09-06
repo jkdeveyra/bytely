@@ -1,4 +1,4 @@
-# Service for generating a unique shorten code used to create Link record
+# Service for generating a unique shortened code used to create Link record
 # Increments code length when collides more than twice
 class Link::GenerateCode < Operation
   DEFAULT_MIN_LENGTH = 1.freeze
