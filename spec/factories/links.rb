@@ -1,7 +1,10 @@
 FactoryGirl.define do
+  sequence(:url) { |n| "#{Faker::Internet.url}#{n}" }
+  sequence(:url_title) { |n|  "#{Faker::GameOfThrones.quote}#{n}" }
+
   factory :link do
-    sequence(:title) { |n| "#{Faker::GameOfThrones.quote}" }
-    sequence(:url) { |n| "#{Faker::Internet.url}#{n}" }
-    sequence(:code) { |n| "#{RandomCode.generate}#{n}"}
+    url
+    title { generate(:url_title) }
+    sequence(:code) { |n| "#{RandomCode.generate}#{n}" }
   end
 end
