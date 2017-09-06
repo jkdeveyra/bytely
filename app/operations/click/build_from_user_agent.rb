@@ -24,7 +24,7 @@ class Click::BuildFromUserAgent < Operation
 
     if ua.os.family != OTHER
       click.os_family = ua.os.family
-      click.os_version = ua.os.version if ua&.os&.respond_to?(:version) && ua&.os&.version
+      click.os_version = ua.os.version.to_s if ua&.os&.respond_to?(:version) && ua&.os&.version
     end
 
     if ua.device.family != OTHER
