@@ -5,7 +5,7 @@ FactoryGirl.define do
     referer { Faker::Internet.url }
     link
     link_code { link.code }
-    created_at { Time.now }
+    sequence(:created_at) { |n| Time.now + n.hour }
 
     after(:build) do |click|
       Click::BuildFromUserAgent.run(

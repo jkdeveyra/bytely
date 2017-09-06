@@ -63,4 +63,15 @@ describe Link::Stat do
       { 'date': { 'year': 2017, 'month': 9, 'day': 3, 'hour': 23 }, 'count': 1 },
     ].to_json
   end
+
+  it 'returns paginated hourly stat' do
+    link = create(:link)
+    create_list(:click, 31, link: link)
+
+    result = Link::Stat.run(id: link.code, after: 0)
+    expect(result.count).to eq 30
+
+    result_b = Link::Stat.run(id: link.code, after: 29) # 29 is the 30th item
+    expect(result_b.count).to eq 1
+  end
 end
