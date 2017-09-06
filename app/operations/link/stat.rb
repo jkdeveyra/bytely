@@ -22,6 +22,7 @@ class Link::Stat < Operation
         sessions: { '$addToSet': '$session_id' },
       }},
       { '$project': { _id: 0, date: '$_id', count: { '$size': '$sessions' } }},
+      { '$sort': { date: 1 }},
       { '$limit': 30 },
       { '$skip': after }
     ])
