@@ -20,29 +20,47 @@ describe Link::Stat do
     create(:click, link: link_b, created_at: Time.utc(2017, 10, 1, 0))
 
     result_a = Link::Stat.run(id: link_a.code)
-    expected_a = [
+    expect(result_a.to_json).to eq [
       { 'date': { 'year': 2017, 'month': 9, 'day': 1, 'hour': 0 }, 'count': 2 },
       { 'date': { 'year': 2017, 'month': 9, 'day': 1, 'hour': 1 }, 'count': 1 }
-    ]
-    expect(result_a.to_json).to eq expected_a.to_json
+    ].to_json
 
     result_b = Link::Stat.run(id: link_b.code)
-    expected_b = [
+    expect(result_b.to_json).to eq [
       { 'date': { 'year': 2017, 'month': 10, 'day': 1, 'hour': 0 }, 'count': 1 },
-    ]
-    expect(result_b.to_json).to eq expected_b.to_json
+    ].to_json
   end
 
   it 'counts unique clicks by session id' do
-    link_b = create(:link)
-    create(:click, link: link_b, session_id: 'a', created_at: Time.utc(2017, 10, 1, 0))
-    create(:click, link: link_b, session_id: 'a', created_at: Time.utc(2017, 10, 1, 0, 10))
+    link = create(:link)
+    create(:click, link: link, session_id: 'a', created_at: Time.utc(2017, 10, 1, 0))
+    create(:click, link: link, session_id: 'a', created_at: Time.utc(2017, 10, 1, 0, 10))
 
-    result_b = Link::Stat.run(id: link_b.code)
-
-    expected_b = [
+    result = Link::Stat.run(id: link.code)
+    expect(result.to_json).to eq [
       { 'date': { 'year': 2017, 'month': 10, 'day': 1, 'hour': 0 }, 'count': 1 },
-    ]
-    expect(result_b.to_json).to eq expected_b.to_json
+    ].to_json
+  end
+
+  it 'can return filtered hourly stat by date' do
+    link = create(:link)
+    create(:click, link: link, created_at: Time.utc(2017, 9, 1, 23))
+    create(:click, link: link, created_at: Time.utc(2017, 9, 2, 0))
+    create(:click, link: link, created_at: Time.utc(2017, 9, 2, 0, 59))
+    create(:click, link: link, created_at: Time.utc(2017, 9, 2, 1))
+    create(:click, link: link, created_at: Time.utc(2017, 9, 3, 23))
+    create(:click, link: link, created_at: Time.utc(2017, 9, 4, 0))
+
+    result = Link::Stat.run(
+      id: link.code,
+      from: '2017-9-2',
+      to: '2017-9-3'
+    )
+
+    expect(result.to_json).to eq [
+      { 'date': { 'year': 2017, 'month': 9, 'day': 2, 'hour': 0 }, 'count': 2 },
+      { 'date': { 'year': 2017, 'month': 9, 'day': 2, 'hour': 1 }, 'count': 1 },
+      { 'date': { 'year': 2017, 'month': 9, 'day': 3, 'hour': 23 }, 'count': 1 },
+    ].to_json
   end
 end
