@@ -28,13 +28,13 @@ In addition to the web interface, API is also provided to query information abou
 | ---------         | ------------- |
 | `GET  /:code`     | Redirects to the original URL |
 | `GET  /links/:code/clicks`        | Get click resources associated with the link  |
-| `GET  /links/:id or /links/:code` | Get the link resource | 
+| `GET  /links/:id` or `/links/:code` | Get the link resource | 
 | `GET  /links/:code/stat`          | Get the hourly unique visit stat of the given link code   |
-| `POST /links`     | Submits the original URL then returns a `Link` resource. Parameters: { link: { title, url }}  | 
+| `POST /links`     | Submits the original URL then returns a `Link` resource. Parameters: `{ link: { title, url }}`  | 
 
 ## Testing
 ### Selenium
-Make sure you have **geckodriver** in your PATH to execute the _feature_ spec. Install **geckodriver**
+Make sure you have **geckodriver** in your PATH to execute the _feature_ specs. Install it
 from https://github.com/mozilla/geckodriver/releases
 
 ### Running
@@ -48,7 +48,7 @@ rspec spec/features
 ```
 API specs:
 ```
-rspec spec/api
+rspec spec/api`
 ```
 Services specs:
 ```
