@@ -5,7 +5,7 @@ describe 'Show link' do
 
   it 'returns link json using ID' do
     get '/links/' + link.id
-    expect(response).to have_http_status :ok
+    expect_status :ok
     expect_json(
       id: link.id.to_s,
       title: link.title,
@@ -17,7 +17,7 @@ describe 'Show link' do
 
   it 'returns link json using code' do
     get '/links/' + link.code
-    expect(response).to have_http_status :ok
+    expect_status :ok
     expect_json(
       id: link.id.to_s,
       title: link.title,
@@ -25,5 +25,10 @@ describe 'Show link' do
       shorten_url: "#{server_url}/#{link.code}",
       original_url: link.url
     )
+  end
+
+  it 'response with 404 if non existing' do
+    get '/links/code_here'
+    expect_status :not_found
   end
 end
