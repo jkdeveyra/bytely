@@ -59,6 +59,7 @@ group :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'factory_girl_rails', '~> 4.8'
+  gem 'airborne', '~> 0.2.13'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -6,24 +6,24 @@ describe 'Show link' do
   it 'returns link json using ID' do
     get '/links/' + link.id
     expect(response).to have_http_status :ok
-    expect(json_response).to eq(
-      'id' => link.id.to_s,
-      'title' => link.title,
-      'code' => link.code,
-      'shorten_url' => "#{server_url}/#{link.code}",
-      'original_url' => link.url
+    expect_json(
+      id: link.id.to_s,
+      title: link.title,
+      code: link.code,
+      shorten_url: "#{server_url}/#{link.code}",
+      original_url: link.url
     )
   end
 
   it 'returns link json using code' do
     get '/links/' + link.code
     expect(response).to have_http_status :ok
-    expect(json_response).to eq(
-      'id' => link.id.to_s,
-      'title' => link.title,
-      'code' => link.code,
-      'shorten_url' => "#{server_url}/#{link.code}",
-      'original_url' => link.url
+    expect_json(
+      id: link.id.to_s,
+      title: link.title,
+      code: link.code,
+      shorten_url: "#{server_url}/#{link.code}",
+      original_url: link.url
     )
   end
 end
