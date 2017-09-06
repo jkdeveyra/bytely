@@ -56,7 +56,9 @@ rspec spec/operations
 ```
 
 ### Reports
-After running the tests, the RSpec report can be viewed at `/reports/rspec.html`.
+After running the tests, you may read the report files.
+* RSpec report is located at `reports/rspec.html`
+* Code coverage report is located at `reports/coverage/index.html`
 
 ## Indexing
 To create indices in the MongoDB database, run the following code:
