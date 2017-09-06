@@ -17,4 +17,8 @@ class ClickSerializer < ActiveModel::Serializer
   def id
     object.id.to_s
   end
+
+  def created_at
+    object.created_at.iso8601
+  end
 end
