@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'site#index'
-  resources :links, only: [:index, :show, :create] do
+  resources :links, only: [:show, :create] do
     member do
       get :clicks
       get :stat

@@ -1,11 +1,6 @@
 class LinksController < ApplicationController
   serialization_scope :view_context
 
-  # GET /links
-  def index
-    @links = Link.all
-  end
-
   # GET /:code
   def visit
     result = Link::Visit.run(params, request)
