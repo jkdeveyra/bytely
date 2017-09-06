@@ -1,3 +1,5 @@
+# Represents the information
+# for every user's visit on the shortened url
 class Click
   include Mongoid::Document
   include Mongoid::Timestamps::Created

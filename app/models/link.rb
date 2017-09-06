@@ -1,3 +1,4 @@
+# Represents the information about shortened link
 class Link
   include Mongoid::Document
   include Mongoid::Timestamps

@@ -1,5 +1,16 @@
 # Creates or returns an existing Link object which represents the shorten link
-# Accepted hash params: link: { title, url }
+#
+# === Parameters
+# `params` accepts the following hash:
+#   link:
+#     title     - Title for the URL
+#     url       - Original URL to redirect to
+#
+# === Returns
+#   result:
+#     success?  - Successfully created a Link document
+#     link      - Created Link document (contains the code)
+#     message   - User-friendly error message
 class Link::Create < Operation
   def run(params)
     set_params(params)

@@ -1,10 +1,14 @@
 module LinksHelper
+  # Provide the shortened url from the given Link document
+  # Include protocol (e.g "http") if full: true
   def link_shorten_path(link, full: true)
     return nil if link.nil?
-    "#{link_shorten_prepend(full: full)}#{link.code}"
+    "#{site_url(full: full)}#{link.code}"
   end
 
-  def link_shorten_prepend(full: true)
+  # Return the site url.
+  # Include protocol (e.g "http") if full: true
+  def site_url(full: true)
     full ? root_url : "#{request.host}:#{request.port}/"
   end
 end

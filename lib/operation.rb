@@ -15,6 +15,7 @@ class Operation
     self.instance.run(*args)
   end
 
+  # Asynchronously run the operation on the background thread
   def self.async_run(*args)
     self.instance.async.run(*args)
   end

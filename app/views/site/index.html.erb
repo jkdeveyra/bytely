@@ -4,12 +4,6 @@
       <div class="masthead clearfix">
         <div class="inner">
           <h3 class="masthead-brand"><%= link_to 'Byte.ly', root_path %></h3>
-          <nav>
-            <ul class="nav masthead-nav">
-              <li><%= link_to 'Features', features_path %></li>
-              <li><%= link_to 'About', about_path %></li>
-            </ul>
-          </nav>
         </div>
       </div>
       <div class="inner cover">
@@ -26,7 +20,7 @@
           <div class="panel-body">
             <div class="original"><%= @created_link.url if @created_link %></div>
             <div class="details">
-              <span class="shorten" data-prepend="<%= link_shorten_prepend(full: false) %>">
+              <span class="shorten" data-prepend="<%= site_url(full: false) %>">
                 <%= link_shorten_path(@created_link, full: false) %>
               </span>
               <a class="clipboard" data-clipboard-text="<%= link_shorten_path @created_link %>">
@@ -39,14 +33,6 @@
         <div class="error-container alert alert-danger <%= 'hidden' unless flash[:error] %>" role="alert">
           <%= flash[:error] %>
         </div>
-
-        <div class="row">
-         <div class="col-lg-12">
-           <p class="lead">
-             <%= link_to 'Learn more', features_path, class: 'btn btn-lg btn-default' %>
-           </p>
-         </div>
-       </div>
       </div>
     </div>
   </div>

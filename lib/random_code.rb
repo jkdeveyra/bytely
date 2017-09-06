@@ -3,6 +3,8 @@
 SEQUENCE = '123456789abcdefghijkmnopqrstuvqxyxABCDEFGHJKLMNPQRSTUVWXYZ'.split('').freeze
 
 class RandomCode
+
+  # Generates a sequence of characters from a randomly selected length of the string
   def self.generate(min: 3, max: 3)
     len = min >= max ? min : (min..max).to_a.sample
     (0...len).map { |i| SEQUENCE.sample }.join

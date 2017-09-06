@@ -1,3 +1,4 @@
+# Represents the application wide property (key-value pair)
 class AppProp
   include Mongoid::Document
   field :key, type: String

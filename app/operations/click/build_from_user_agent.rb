@@ -2,6 +2,13 @@ require 'user_agent_parser'
 
 # Parses the user_agent and assign relevant attributes
 # to the given Click document
+#
+# === Parameters
+#   params:
+#     click       - Click object where the user agent info will be assigned to.
+#     user_agent  - String representation of the user_agent
+#
+# Return the Click document
 class Click::BuildFromUserAgent < Operation
   OTHER = 'Other'.freeze
 

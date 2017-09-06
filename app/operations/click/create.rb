@@ -1,4 +1,11 @@
 # Creates Click record from request and associate it with the given link
+#
+# === Parameters
+#   params:
+#     link       - Link object to build the Click with
+#     request    - Rails request object used to retrieve user information
+#
+# Returns boolean which represent the operation was successful
 class Click::Create < Operation
   def run(link:, request:)
     return if link.nil? || request.nil?

@@ -1,7 +1,12 @@
 # Generate unique hourly click stat for a given date range
 # Uniqueness is identified by the session id associated with the click record.
 #
-# params: { id, after (pagination), from, to}
+# === Parameters
+#   params:
+#     id      - Link code
+#     after   - Used for pagination. Skips `after` no of documents
+#     from    - Filter start date, inclusive. Accepts common date formats
+#     to      - Filter end date, inclusive
 class Link::Stat < Operation
   def run(params)
     after = params[:after].present? ? Integer(params[:after]) : 0
