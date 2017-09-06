@@ -36,11 +36,9 @@
           </div>
         </div>
 
-        <% if flash[:error] %>
-            <div class="alert alert-danger" role="alert">
-              <%= flash[:error] %>
-            </div>
-        <% end %>
+        <div class="error-container alert alert-danger <%= 'hidden' unless flash[:error] %>" role="alert">
+          <%= flash[:error] %>
+        </div>
 
         <div class="row">
          <div class="col-lg-12">

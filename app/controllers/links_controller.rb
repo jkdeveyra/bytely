@@ -50,8 +50,8 @@ class LinksController < ApplicationController
         format.html { redirect_to root_path(link_id: result.link.id) }
         format.json { render json: result.link }
       else
-        format.html { redirect_to root_path, notice: 'Unable to shorten link.' }
-        format.json { render json: { link: result.link.errors }, status: :unprocessable_entity }
+        format.html { redirect_to root_path, notice: result.message }
+        format.json { render json: { message: result.message }, status: :unprocessable_entity }
       end
     end
   end

@@ -19,7 +19,7 @@ feature 'Create link', js: true do
   end
 
   scenario 'Same code for same URL' do
-    link = create(:link, url: 'www.google.com')
+    link = create(:link, url: 'http://www.google.com')
 
     visit '/'
     fill_in 'link[url]', with: link.url

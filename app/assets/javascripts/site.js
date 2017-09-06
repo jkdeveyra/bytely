@@ -1,11 +1,11 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-
 $(document).on('turbolinks:load', function () {
   if ($('#site').length > 0) {
     const $shorten = $('.shorten')
     const $linkContainer = $('.link-container')
+    const $errorContainer = $('.error-container')
     const $clipboard = $('#site .clipboard')
     const $statLink = $('#site a.stat')
 
@@ -38,9 +38,14 @@ $(document).on('turbolinks:load', function () {
           $clipboard[0].dataset.clipboardText = data.shorten_url
           $statLink.prop('href', $statLink.data('prepend') + data.id)
           $linkContainer.removeClass('hidden')
+          $errorContainer.addClass('hidden')
           formElem.reset()
         },
-        error: function () {
+        error: function (data) {
+          const message = data.responseJSON.message || 'Error URL provided'
+          $errorContainer.html(message)
+          $linkContainer.addClass('hidden')
+          $errorContainer.removeClass('hidden')
         }
       })
     })

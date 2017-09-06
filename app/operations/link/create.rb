@@ -3,20 +3,24 @@
 class Link::Create < Operation
   def run(params)
     set_params(params)
-    begin
-      link = Link.where(url: link_params[:url]).first_or_create(
-        title: link_params[:title],
-        code: Link::GenerateCode.run
-      )
-      success = true
-    rescue Exception => e # e is used for debugging
+    url = normalize_url(link_params[:url])
+    if url
+      link = lookup_record(url)
+      if link
+        success = true
+      else
+        success = false
+        message = 'Unable to shorten link.'
+      end
+    else
       success = false
+      message = 'Link must be a valid web URL. (Eg. https://www.google.com, google.com)'
     end
 
-    OpenStruct.new(
-      success?: success,
-      link: link
-    )
+    result = OpenStruct.new(success?: success)
+    result.link = link if link
+    result.message = message if message
+    result
   end
 
   private
@@ -32,5 +36,28 @@ class Link::Create < Operation
 
   def link_params
     @params.require(:link).permit(:title, :url)
+  end
+
+  # Normalizes and returns the URL if valid, otherwise nil
+  def normalize_url(url)
+    return nil if url.nil?
+    begin
+      uri = Addressable::URI.heuristic_parse(url)
+      uri.host.present? && /^http(s)?$/.match(uri.scheme) ? uri.to_s : nil
+    rescue
+      nil
+    end
+  end
+
+  # Find for existing record or creates a new one
+  def lookup_record(url)
+    begin
+      Link.where(url: url).first_or_create(
+        title: link_params[:title],
+        code: Link::GenerateCode.run
+      )
+    rescue
+      nil
+    end
   end
 end
